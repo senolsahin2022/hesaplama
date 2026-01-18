@@ -1,0 +1,76 @@
+---
+// src/components/Header.astro
+import Menu from './Menu.astro';
+---
+
+<header class="bg-blue-700 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+
+      <!-- Logo -->
+      <a href="/" class="text-2xl font-bold">Hesaplama.NET</a>
+
+      <!-- Desktop Menü + Mobil Menü (Menu.astro içinde) -->
+      <Menu />
+
+      <!-- Mobil Menü Açma Butonu -->
+      <button id="mobileBtn" class="md:hidden p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- MOBİL MENÜYÜ AÇIP KAPATMA + BODY SCROLL KİLİTLEME -->
+<script>
+  const mobileBtn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  // Menüyü aç/kapat + body scroll engelle
+  mobileBtn?.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    if (isHidden) {
+      document.body.classList.remove('mobile-menu-open');
+    } else {
+      document.body.classList.add('mobile-menu-open');
+    }
+  });
+
+  // Menü içindeki linklere tıklayınca menüyü kapat
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      document.body.classList.remove('mobile-menu-open');
+    });
+  });
+
+  // Dışarıya tıklayınca da kapanabilir (isteğe bağlı)
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+      mobileMenu.classList.add('hidden');
+      document.body.classList.remove('mobile-menu-open');
+    }
+  });
+</script>
+
+<!-- BODY SCROLL KİLİTLEME STİLİ -->
+<style is:global>
+  /* Menü açıkken arka plan kaymasın */
+  body.mobile-menu-open {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Chrome, Safari'de summary okunu kaldır */
+  details summary::-webkit-details-marker { 
+    display: none; 
+  }
+  details summary { 
+    list-style: none; 
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+// src/layouts/MainLayout.astro
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { title = "Hesaplama.NET" } = Astro.props;
+---
+
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 bg-gray-50">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

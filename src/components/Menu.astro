@@ -1,0 +1,118 @@
+---
+// src/components/Menu.astro
+const menu = [
+  {
+    category: "Kredi",
+    items: [
+      { title: "İhtiyaç Kredisi Hesaplama", slug: "ihtiyac-kredisi-hesaplama" },
+      { title: "Konut Kredisi Hesaplama", slug: "konut-kredisi-hesaplama" },
+      { title: "Taşıt Kredisi Hesaplama", slug: "tasit-kredisi-hesaplama" },
+      { title: "İş Yeri Kredisi Hesaplama", slug: "is-yeri-kredisi-hesaplama" },
+      { title: "Kredi Hesaplama", slug: "kredi" },
+      { title: "Kredi Kartı Asgari Ödeme", slug: "kredi-karti-asgari-odeme-hesaplama" },
+      { title: "Kredi Erken Kapatma Cezası", slug: "kredi-erken-kapatma-cezasi-hesaplama" },
+      { title: "Kredi Gecikme Faizi", slug: "kredi-gecikme-faizi-hesaplama" },
+      { title: "Ne Kadar Kredi Alabilirim", slug: "ne-kadar-kredi-alabilirim" }
+    ]
+  },
+  {
+    category: "Finans",
+    items: [
+      { title: "Faiz Hesaplama", slug: "faiz-hesaplama" },
+      { title: "Bileşik Faiz Hesaplama", slug: "bilesik-faiz-hesaplama" },
+      { title: "Döviz Çevirici", slug: "doviz-hesaplama" }
+    ]
+  },
+  {
+    category: "Vergi",
+    items: [
+      { title: "KDV Hesaplama", slug: "kdv-hesaplama" },
+      { title: "Vergi Dilimi 2025", slug: "vergi-dilimi-hesaplama" },
+      { title: "MTV Hesaplama", slug: "mtv-hesaplama" }
+    ]
+  },
+  {
+    category: "Sağlık",
+    items: [
+      { title: "BMI Hesaplama", slug: "bmi-hesaplama" },
+      { title: "Hamilelik Hesaplama", slug: "hamilelik-hesaplama" },
+      { title: "Ovulasyon Takvimi", slug: "ovulasyon-hesaplama" },
+      { title: "İdeal Kilo Hesaplama", slug: "ideal-kilo-hesaplama" }
+    ]
+  },
+  {
+    category: "İş & SGK",
+    items: [
+      { title: "Kıdem Tazminatı", slug: "kidem-tazminati-hesaplama" },
+      { title: "İhbar Tazminatı", slug: "ihbar-tazminati-hesaplama" },
+      { title: "Yıllık İzin Hesaplama", slug: "yillik-izin-hesaplama" }
+    ]
+  },
+  {
+    category: "Diğer",
+    items: [
+      { title: "Yaş Hesaplama", slug: "yas-hesaplama" },
+      { title: "Yakıt Tüketim Hesaplama", slug: "yakit-hesaplama" },
+      { title: "Yüzde Hesaplama", slug: "yuzde-hesaplama" },
+      { title: "Ebced Hesaplama", slug: "ebced-hesaplama" }
+    ]
+  }
+];
+---
+
+<!-- Desktop Menu -->
+<nav class="hidden md:flex space-x-6">
+  {menu.map(cat => (
+    <div class="relative group">
+      <button class="hover:bg-blue-800 px-4 py-2 rounded transition flex items-center gap-1">
+        {cat.category}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="absolute top-full left-0 mt-1 w-64 bg-white text-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        {cat.items.map(item => (
+          <a href={`/${item.slug}`} class="block px-4 py-3 hover:bg-blue-50 border-b border-gray-100 last:border-0">
+            {item.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+</nav>
+
+<!-- MOBİL MENÜ – SORUNSUZ VERSİYON -->
+<div id="mobileMenu" class="md:hidden hidden fixed inset-x-0 top-16 bg-blue-800 max-h-[80vh] overflow-y-auto overscroll-contain">
+  <div class="pb-20"> <!-- Alttan kayma olmasın diye padding -->
+    {menu.map(cat => (
+      <details class="border-t border-blue-700 first:border-t-0">
+        <summary class="px-6 py-4 cursor-pointer font-medium flex justify-between items-center text-white">
+          {cat.category}
+          <svg class="w-5 h-5 transition-transform ui-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+        <div class="bg-white text-gray-800">
+          {cat.items.map(item => (
+            <a 
+              href={`/${item.slug}`} 
+              class="block px-8 py-4 border-b border-gray-100 last:border-0 hover:bg-blue-50 transition"
+              onclick="document.getElementById('mobileMenu').classList.add('hidden')"
+            >
+              {item.title}
+            </a>
+          ))}
+        </div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* En önemli kısım – scroll kaymasını tamamen engeller */
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary { list-style: none; }
+</style>

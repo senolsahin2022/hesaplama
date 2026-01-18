@@ -1,0 +1,12 @@
+---
+// src/pages/bmi-hesaplama.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import BMIHesaplayici from '../components/calculators/BMIHesaplayici.jsx';
+---
+
+<MainLayout title="BMI Hesaplama - Vücut Kitle İndeksi">
+  <div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-center mb-8">BMI Hesaplama</h1>
+    <BMIHesaplayici client:load />
+  </div>
+</MainLayout>

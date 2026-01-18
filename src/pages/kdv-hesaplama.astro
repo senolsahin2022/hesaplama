@@ -1,0 +1,9 @@
+---
+// src/pages/kdv-hesaplama.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import KDVHesaplayici from '../components/calculators/KDVHesaplayici.jsx';
+---
+
+<MainLayout title="KDV Hesaplayıcı 2025 - KDV Dahil/Hariç Hesaplama" description="KDV hariç tutardan KDV dahil fiyat hesaplama. %1, %10, %20 KDV oranları ile hızlı hesaplama.">
+  <KDVHesaplayici client:load />
+</MainLayout>
