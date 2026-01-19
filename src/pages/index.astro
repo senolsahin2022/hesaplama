@@ -1,5 +1,4 @@
 ---
-// src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
 import Card from '../components/ui/Card.astro';
 
@@ -17,11 +16,31 @@ const popularCalculators = [
   { title: 'Yaş Hesaplayıcı', desc: 'Tam yaşını günle hesapla', href: '/yas-hesaplama', icon: '🎂' },
   { title: 'Boy Kilo İdeal Ağırlık', desc: 'İdeal kilo hesaplama', href: '/ideal-kilo', icon: '👤' },
 ];
+
+// Instagram fetch (SSR)
+let instaHtml = '';
+
+try {
+  const res = await fetch('https://www.instagram.com/nusr_et', {
+    headers: {
+      'user-agent': 'Mozilla/5.0',
+      'accept': 'text/html'
+    }
+  });
+
+  instaHtml = await res.text();
+} catch (err) {
+  instaHtml = '<p>Instagram içeriği alınamadı.</p>';
+}
 ---
 
-<MainLayout title="Hesaplama.net - Her Şeyin Hesaplayıcısı" description="KDV, faiz, BMI, hamilelik, döviz ve 100+ hesaplama aracı ücretsiz.">
+<MainLayout
+  title="Hesaplama.net - Her Şeyin Hesaplayıcısı"
+  description="KDV, faiz, BMI, hamilelik, döviz ve 100+ hesaplama aracı ücretsiz."
+>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4">
     <div class="max-w-7xl mx-auto">
+
       <!-- Hero -->
       <div class="text-center mb-16">
         <h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
@@ -32,10 +51,10 @@ const popularCalculators = [
         </p>
       </div>
 
-      <!-- Arama Çubuğu (ileride ekleriz, şimdilik dekor) -->
+      <!-- Arama Çubuğu -->
       <div class="max-w-2xl mx-auto mb-12">
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Hesaplayıcı ara... (örneğin: KDV, faiz, hamilelik)"
           class="w-full px-6 py-4 rounded-xl text-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-primary/30"
         />
@@ -48,7 +67,12 @@ const popularCalculators = [
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {popularCalculators.map(calc => (
-          <Card href={calc.href} title={calc.title} description={calc.desc} icon={calc.icon} />
+          <Card
+            href={calc.href}
+            title={calc.title}
+            description={calc.desc}
+            icon={calc.icon}
+          />
         ))}
       </div>
 
@@ -57,6 +81,18 @@ const popularCalculators = [
           Toplam <strong>100+</strong> hesaplama aracı • Hiçbir bilgi kaydetmiyoruz • Tamamen ücretsiz
         </p>
       </div>
+
+      <!-- Instagram HTML -->
+      <div class="max-w-4xl mx-auto mt-20 p-6 bg-white dark:bg-gray-800 rounded-xl overflow-auto">
+        <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">
+          Instagram İçeriği (Raw HTML)
+        </h3>
+
+        <div class="text-xs whitespace-pre-wrap text-gray-700 dark:text-gray-300">
+          {instaHtml}
+        </div>
+      </div>
+
     </div>
   </div>
 </MainLayout>
