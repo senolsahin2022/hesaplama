@@ -9,88 +9,191 @@ const popularCalculators = [
   { title: 'Hamilelik Hesaplayıcı', desc: 'Doğum tarihi tahmini', href: '/hamilelik-hesaplama', icon: '🤰' },
   { title: 'Döviz Çevirici', desc: 'Anlık kur ile döviz hesaplama', href: '/doviz-hesaplama', icon: '💱' },
   { title: 'Ovulasyon Takibi', desc: 'Yumurtlama dönemi hesaplama', href: '/ovulasyon-hesaplama', icon: '📅' },
-  { title: 'SGK Hizmet Dökümü', desc: 'Prim günü sorgulama (yönlendirme)', href: '/sgk-hizmet-dokumu', icon: '📋' },
+  { title: 'SGK Hizmet Dökümü', desc: 'Prim günü sorgulama', href: '/sgk-hizmet-dokumu', icon: '📋' },
   { title: 'Vergi Dilimi Hesaplama', desc: '2025 vergi dilimleri', href: '/vergi-dilimi', icon: '💸' },
   { title: 'Kredi Hesaplayıcı', desc: 'Aylık taksit hesaplama', href: '/kredi-hesaplama', icon: '🏦' },
   { title: 'Yol & Yakıt Hesaplayıcı', desc: 'Seyahat maliyeti', href: '/yakit-hesaplama', icon: '⛽' },
   { title: 'Yaş Hesaplayıcı', desc: 'Tam yaşını günle hesapla', href: '/yas-hesaplama', icon: '🎂' },
-  { title: 'Boy Kilo İdeal Ağırlık', desc: 'İdeal kilo hesaplama', href: '/ideal-kilo', icon: '👤' },
+  { title: 'İdeal Kilo', desc: 'Boy kilo ideal ağırlık', href: '/ideal-kilo', icon: '👤' },
 ];
-
-// Instagram fetch (SSR)
-let instaHtml = '';
-
-try {
-  const res = await fetch('https://www.instagram.com/nusr_et', {
-    headers: {
-      'user-agent': 'Mozilla/5.0',
-      'accept': 'text/html'
-    }
-  });
-
-  instaHtml = await res.text();
-} catch (err) {
-  instaHtml = '<p>Instagram içeriği alınamadı.</p>';
-}
 ---
 
 <MainLayout
   title="Hesaplama.net - Her Şeyin Hesaplayıcısı"
-  description="KDV, faiz, BMI, hamilelik, döviz ve 100+ hesaplama aracı ücretsiz."
+  description="KDV, faiz, kredi, BMI, hamilelik, döviz ve 100+ ücretsiz hesaplama aracı."
 >
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4">
     <div class="max-w-7xl mx-auto">
 
-      <!-- Hero -->
-      <div class="text-center mb-16">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+      <!-- HERO -->
+      <section class="text-center mb-20">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
           Hesapla, <span class="text-primary">Öğren, Kolayca</span>
         </h1>
         <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Türkiye'de en çok kullanılan 100+ hesaplama aracı artık daha hızlı, daha güzel ve tamamen ücretsiz!
+          Türkiye’nin en kapsamlı ücretsiz online hesaplama platformu.
         </p>
-      </div>
+      </section>
 
-      <!-- Arama Çubuğu -->
-      <div class="max-w-2xl mx-auto mb-12">
+    
+
+      <!-- SEARCH -->
+      <div class="max-w-2xl mx-auto mb-16">
         <input
           type="text"
-          placeholder="Hesaplayıcı ara... (örneğin: KDV, faiz, hamilelik)"
+          placeholder="Hesaplayıcı ara (KDV, faiz, kredi...)"
           class="w-full px-6 py-4 rounded-xl text-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-primary/30"
         />
       </div>
 
-      <!-- Popüler Hesaplayıcılar -->
-      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">
-        En Çok Kullanılanlar
-      </h2>
+<section class="max-w-5xl mx-auto my-24 px-4 leading-relaxed">
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {popularCalculators.map(calc => (
-          <Card
-            href={calc.href}
-            title={calc.title}
-            description={calc.desc}
-            icon={calc.icon}
-          />
-        ))}
-      </div>
+  <!-- H1 -->
+  <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+    Hesaplama.NET'e Hoş Geldiniz
+  </h1>
 
-      <div class="text-center mt-16">
-        <p class="text-gray-600 dark:text-gray-400">
-          Toplam <strong>100+</strong> hesaplama aracı • Hiçbir bilgi kaydetmiyoruz • Tamamen ücretsiz
-        </p>
-      </div>
+  <!-- Intro -->
+  <p class="text-lg text-gray-600 dark:text-gray-300 mb-10">
+    Günlük yaşamda sıkça kullanılan yüzlerce hesaplamayı bir araya getirerek
+    doğru sonuçlara kolayca ulaşabilmenizi sağlayan, hesaplamanın güvenilir
+    adresi <strong>hesaplama.net</strong>'e hoş geldiniz.
+  </p>
 
-      <!-- Instagram HTML -->
-      <div class="max-w-4xl mx-auto mt-20 p-6 bg-white dark:bg-gray-800 rounded-xl overflow-auto">
-        <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-          Instagram İçeriği (Raw HTML)
-        </h3>
+  <!-- 💰 ADSENSE TOP -->
+  <div class="my-12 flex justify-center">
+    <div
+      id="div-gpt-ad-top"
+      class="min-h-[250px] w-full bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-sm text-gray-500"
+    >
+      <!-- Adsense / GPT kodun buraya -->
+      Reklam Alanı
+    </div>
+  </div>
 
-        <div class="text-xs whitespace-pre-wrap text-gray-700 dark:text-gray-300">
-          {instaHtml}
+  <!-- News Title -->
+  <h4 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+    Güncel Haberler
+  </h4>
+
+  <!-- News List -->
+  <div class="space-y-4">
+
+    <!-- ITEM -->
+    <div class="pl-4 border-l-4 border-gray-200 dark:border-gray-700">
+      <span class="block text-xs text-gray-500 mb-1">18 Ağustos 2025</span>
+      Millî Eğitim Akademisi sınavına giren adaylar için hazırlanan
+      <a
+        href="//ags-puan.hesaplama.net"
+        class="text-primary font-medium hover:underline"
+      >
+        AGS Puan Hesaplama
+      </a>
+      aracı sisteme eklendi.
+    </div>
+
+    <div class="pl-4 border-l-4 border-gray-200 dark:border-gray-700">
+      <span class="block text-xs text-gray-500 mb-1">28 Temmuz 2025</span>
+      Finansal yatırımlar için geliştirilen
+      <a
+        href="//eurobond.hesaplama.net"
+        class="text-primary font-medium hover:underline"
+      >
+        Eurobond Hesaplama
+      </a>
+      aracı yayına alındı.
+    </div>
+
+    <div class="pl-4 border-l-4 border-gray-200 dark:border-gray-700">
+      <span class="block text-xs text-gray-500 mb-1">27 Haziran 2025</span>
+      <a
+        href="//ozel-guvenlik-sinavi-puan.hesaplama.net"
+        class="text-primary font-medium hover:underline"
+      >
+        Özel Güvenlik Sınavı Puanı Hesaplama
+      </a>
+      aracı kullanıma sunuldu.
+    </div>
+
+    <div class="pl-4 border-l-4 border-gray-200 dark:border-gray-700">
+      <span class="block text-xs text-gray-500 mb-1">3 Haziran 2025</span>
+      <a
+        href="//kusak.hesaplama.net"
+        class="text-primary font-medium hover:underline"
+      >
+        Kuşak Hesaplama
+      </a>
+      aracı diğer hesaplamalar altına eklendi.
+    </div>
+
+    <!-- devamını birebir bu formatta ekleyebilirsin -->
+
+  </div>
+
+</section>
+
+
+      <!-- POPULAR -->
+      <section>
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">
+          En Çok Kullanılanlar
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {popularCalculators.map(calc => (
+            <Card {...calc} />
+          ))}
         </div>
+      </section>
+
+
+      <!-- ADSENSE MID -->
+      <div class="max-w-4xl mx-auto my-24 text-center">
+        <div class="min-h-[250px] bg-gray-200 dark:bg-gray-700 rounded-xl flex items-center justify-center text-sm text-gray-500">
+          Reklam Alanı (300x250)
+        </div>
+      </div>
+
+
+
+      <!-- BLOG -->
+      <section class="mt-24 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">
+          Rehberler & İpuçları
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="/blog/kdv-nedir" class="p-6 bg-white dark:bg-gray-800 rounded-xl hover:shadow-lg">
+            <h3 class="font-bold mb-2">KDV Nedir?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              KDV nasıl hesaplanır?
+            </p>
+          </a>
+
+          <a href="/blog/faiz-hesaplama" class="p-6 bg-white dark:bg-gray-800 rounded-xl hover:shadow-lg">
+            <h3 class="font-bold mb-2">Faiz Nasıl Hesaplanır?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              Basit ve bileşik faiz
+            </p>
+          </a>
+
+          <a href="/blog/bmi-nedir" class="p-6 bg-white dark:bg-gray-800 rounded-xl hover:shadow-lg">
+            <h3 class="font-bold mb-2">BMI Nedir?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              İdeal kilo rehberi
+            </p>
+          </a>
+        </div>
+      </section>
+
+
+        
+        
+
+
+      <!-- FOOT NOTE -->
+      <div class="text-center mt-24 text-gray-600 dark:text-gray-400">
+        100+ hesaplama aracı • Ücretsiz • Veri kaydı yok
       </div>
 
     </div>
